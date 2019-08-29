@@ -8,3 +8,17 @@ before_install:
 
 script:
   - docker run -e CI=true kasperkowalski/tutorial-docker-1 npm run test
+
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-central-1"
+  app: "tutorial-docker"
+  env: "TutorialDocker-env"
+  bucket_name: "elasticbeanstalk-eu-central-1-920030253755"
+  bucket_path: "tutorial-docker"
+  on:
+    branch: master
+  access_key_id: 
+    secure: "$AWS_ACCESS_KEY"
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
